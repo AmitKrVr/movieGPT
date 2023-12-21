@@ -1,80 +1,48 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
 import { LOGO_URL, PROFILE_LOGO } from "../utils/constant";
-import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../utils/firebase";
-import { useEffect, useState } from "react";
-import { addUser, removeUser } from "../utils/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import useHeaderLogic from "../hooks/useHeaderLogic";
 
 const Header = ({ handleLoginForm }) => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const user = useSelector((store) => store.user);
-
-    const [isHovered, setIsHovered] = useState(false);
-
-    const handleSingout = () => {
-        signOut(auth)
-            .then(() => {
-                // Sign-out successful.
-            })
-            .catch((error) => {
-                // An error happened.
-                console.log(error.message);
-            });
-    };
-
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-    };
-
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-    };
-
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const { uid, email, displayName, photoURL } = user;
-                dispatch(
-                    addUser({
-                        uid: uid,
-                        email: email,
-                        displayName: displayName,
-                        photoURL: photoURL,
-                    })
-                );
-                navigate("/browse");
-            } else {
-                // User is signed out
-                dispatch(removeUser());
-                navigate("/");
-            }
-        });
-    }, []);
+    const {
+        user,
+        isHovered,
+        handleSingout,
+        handleGptSearchPage,
+        handleMouseEnter,
+        handleMouseLeave,
+    } = useHeaderLogic();
 
     return (
         <div className="absolute z-10 w-full flex justify-center bg-gradient-to-b from-[#000000c6]">
             <div className="w-11/12 md:w-10/12 flex items-center justify-between ">
                 <div>
                     <img
-                        className="h-14 sm:h-16 md:h-20"
+                        className="h-12 sm:h-16 md:h-20"
                         src={LOGO_URL}
                         alt="logo"
                     />
                 </div>
                 <div>
                     {user ? (
-                        <div
-                            onMouseEnter={handleMouseEnter}
-                            onMouseLeave={handleMouseLeave}
-                            className="flex px-2 py-4 space-x-2 ">
-                            <img
-                                src={PROFILE_LOGO}
-                                alt=""
-                                className="rounded-md"
-                            />
-                            <i className="fa-solid fa-sort-down text-white text-xl "></i>
+                        <div className="flex justify-center items-center space-x-2">
+                            <div>
+                                <button
+                                    onClick={handleGptSearchPage}
+                                    className="px-1.5 md:px-3 py-1.5 md:py-1.5 rounded-md text-sm md:text-base text-white opacity-90 bg-[#e50914] hover:bg-opacity-90">
+                                    GPT Search
+                                </button>
+                            </div>
+                            <div
+                                onMouseEnter={handleMouseEnter}
+                                onMouseLeave={handleMouseLeave}
+                                className="flex px-2 py-4 space-x-2 ">
+                                <img
+                                    src={PROFILE_LOGO}
+                                    alt=""
+                                    className="rounded-md"
+                                />
+                                <i className="fa-solid fa-sort-down text-white text-xl "></i>
+                            </div>
                         </div>
                     ) : (
                         <Link to="/login">

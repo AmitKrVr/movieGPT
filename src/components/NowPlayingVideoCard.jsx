@@ -2,6 +2,7 @@ import { IMAGE_URL } from "../utils/constant";
 import "./NowPlayingVideoCard.css";
 
 const NowPlayingVideoCard = ({ posterPath }) => {
+    if (!posterPath) return null;
     return (
         <div className="w-28 md:w-36 overflow-hidden ">
             <img

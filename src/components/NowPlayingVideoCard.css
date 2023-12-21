@@ -1,8 +1,12 @@
 .scroll::-webkit-scrollbar {
-    display: none;
+    height: 3px;
+    background-color: #aaa;
+}
+.scroll::-webkit-scrollbar-thumb {
+    background: #e50914;
 }
 
 .scroll {
     -ms-overflow-style: none;
-    scrollbar-width: none;
+    scrollbar-width: thin;
 }

@@ -9,6 +9,9 @@ export const PROFILE_LOGO =
 
 export const IMAGE_URL = "https://image.tmdb.org/t/p/original";
 
+export const TMDB_MOVIE_SEARCH_API =
+    "https://api.themoviedb.org/3/search/movie?query=";
+
 const tmdbAPI = process.env.REACT_APP_AUTHORIZATION_TOKEN;
 
 export const API_OPTIONS = {
