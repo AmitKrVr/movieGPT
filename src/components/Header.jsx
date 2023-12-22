@@ -1,10 +1,14 @@
-import { LOGO_URL, PROFILE_LOGO } from "../utils/constant";
+import { PROFILE_LOGO } from "../utils/constant";
 import { Link } from "react-router-dom";
 import useHeaderLogic from "../hooks/useHeaderLogic";
+import { useDispatch, useSelector } from "react-redux";
+import { changeLanguage } from "../utils/configSlice";
+import { SUPPORTED_LANG, lang } from "../utils/languageConstant";
 
 const Header = ({ handleLoginForm }) => {
     const {
         user,
+        showGptPage,
         isHovered,
         handleSingout,
         handleGptSearchPage,
@@ -12,15 +16,21 @@ const Header = ({ handleLoginForm }) => {
         handleMouseLeave,
     } = useHeaderLogic();
 
+    const langKey = useSelector((store) => store.config?.lang);
+
+    const dispatch = useDispatch();
+
+    const handleLanguageChange = (e) => {
+        dispatch(changeLanguage(e.target.value));
+    };
+
     return (
-        <div className="absolute z-10 w-full flex justify-center bg-gradient-to-b from-[#000000c6]">
+        <div className="absolute z-10 w-full h-24 flex justify-center bg-gradient-to-b from-[#000000c6]">
             <div className="w-11/12 md:w-10/12 flex items-center justify-between ">
                 <div>
-                    <img
-                        className="h-12 sm:h-16 md:h-20"
-                        src={LOGO_URL}
-                        alt="logo"
-                    />
+                    <h1 className="text-4xl font-extrabold select-none text-[#e50914]">
+                        MovieGPT
+                    </h1>
                 </div>
                 <div>
                     {user ? (
@@ -29,7 +39,7 @@ const Header = ({ handleLoginForm }) => {
                                 <button
                                     onClick={handleGptSearchPage}
                                     className="px-1.5 md:px-3 py-1.5 md:py-1.5 rounded-md text-sm md:text-base text-white opacity-90 bg-[#e50914] hover:bg-opacity-90">
-                                    GPT Search
+                                    {showGptPage ? "Home page" : "GPT Search"}
                                 </button>
                             </div>
                             <div
@@ -45,13 +55,26 @@ const Header = ({ handleLoginForm }) => {
                             </div>
                         </div>
                     ) : (
-                        <Link to="/login">
-                            <button
-                                onClick={handleLoginForm}
-                                className="px-2 sm:px-3 md:px-4 py-1 md:py-1.5 text-sm md:text-base rounded-sm md:rounded-md  bg-[#e50914] text-white">
-                                Sign In
-                            </button>
-                        </Link>
+                        <>
+                            <select
+                                onChange={handleLanguageChange}
+                                className="mr-2 px-2 sm:px-3 md:px-4 py-1 md:py-1.5 text-sm md:text-base rounded-sm md:rounded-md text-white bg-black bg-opacity-50">
+                                {SUPPORTED_LANG.map((lang) => (
+                                    <option
+                                        key={lang.identifier}
+                                        value={lang.identifier}>
+                                        {lang.name}
+                                    </option>
+                                ))}
+                            </select>
+                            <Link to="/login">
+                                <button
+                                    onClick={handleLoginForm}
+                                    className="px-2 sm:px-3 md:px-4 py-1 md:py-1.5 text-sm md:text-base rounded-sm md:rounded-md  bg-[#e50914] text-white">
+                                    {lang[langKey].loginText}
+                                </button>
+                            </Link>
+                        </>
                     )}
                 </div>
             </div>
@@ -68,7 +91,7 @@ const Header = ({ handleLoginForm }) => {
                             Manage Profiles
                         </div>
                         <div className="cursor-pointer hover:underline">
-                            Transfer Profile
+                            Tranfer Profile
                         </div>
                         <div className="cursor-pointer hover:underline">
                             Account

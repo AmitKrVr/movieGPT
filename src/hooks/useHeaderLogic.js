@@ -10,6 +10,7 @@ const useHeaderLogic = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector((store) => store.user);
+    const showGptPage = useSelector((store) => store.gpt?.showGptPage);
 
     const [isHovered, setIsHovered] = useState(false);
 
@@ -56,6 +57,7 @@ const useHeaderLogic = () => {
 
     return {
         user,
+        showGptPage,
         isHovered,
         handleSingout,
         handleGptSearchPage,

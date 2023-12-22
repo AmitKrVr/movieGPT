@@ -1,5 +1,7 @@
+import { useSelector } from "react-redux";
 import useLoginLogic from "../hooks/useLoginLogic";
 import { BG_URL } from "../utils/constant";
+import { lang } from "../utils/languageConstant";
 
 const Login = () => {
     const {
@@ -12,6 +14,8 @@ const Login = () => {
         handleValidation,
     } = useLoginLogic();
 
+    const langKey = useSelector((store) => store.config?.lang);
+
     return (
         <div
             className="absolute top-0 left-0 h-[38rem] w-full grid place-items-center"
@@ -22,7 +26,9 @@ const Login = () => {
                     action=""
                     className="flex flex-col w-11/12 md:w-3/4 gap-4 text-white">
                     <h1 className="font-bold text-2xl md:text-3xl tracking-wider mb-2 md:mb-3">
-                        {isLoginForm ? "Sign In" : "Sign up"}
+                        {isLoginForm
+                            ? lang[langKey].loginText
+                            : lang[langKey].signupText}
                     </h1>
 
                     {!isLoginForm && (
@@ -30,7 +36,7 @@ const Login = () => {
                             ref={fullName}
                             type="text"
                             required
-                            placeholder="Full Name"
+                            placeholder={lang[langKey].FullNamePlaceholder}
                             className="bg-[#333] px-4 py-2.5 md:py-3 w-full rounded-sm md:rounded-md"
                         />
                     )}
@@ -38,14 +44,14 @@ const Login = () => {
                     <input
                         ref={email}
                         type="email"
-                        placeholder="Email or phone number"
+                        placeholder={lang[langKey].EmailAddressPlaceholder}
                         className="bg-[#333] px-4 py-2.5 md:py-3 w-full rounded-sm md:rounded-md"
                     />
 
                     <input
                         ref={password}
                         type="password"
-                        placeholder="Password"
+                        placeholder={lang[langKey].PasswordPlaceholder}
                         className="bg-[#333] px-4 py-2.5 md:py-3 w-full rounded-sm md:rounded-md"
                     />
 
@@ -58,27 +64,33 @@ const Login = () => {
                     <button
                         onClick={handleValidation}
                         className="bg-[#e50914] font-semibold mt-2 md:mt-4 px-4 py-2.5 md:py-3 w-full rounded-sm md:rounded-md">
-                        {!isLoginForm ? "Sign up" : "Sign In"}
+                        {!isLoginForm
+                            ? lang[langKey].signupText
+                            : lang[langKey].loginText}
                     </button>
 
                     <div className="flex justify-between text-sm text-[#b3b3b3]">
                         <span>
                             <input type="checkbox" defaultChecked />
-                            <label> Remember me </label>
+                            <label> {lang[langKey].rememberMe} </label>
                         </span>
-                        <span className="hover:underline">Need help?</span>
+                        <span className="hover:underline">
+                            {lang[langKey].needHelp}
+                        </span>
                     </div>
 
                     <div className="mt-4 md:mt-7 ">
                         <span className="text-[#b3b3b3] mr-2">
                             {isLoginForm
-                                ? "New to Netflix?"
+                                ? "New to MovieGPT?"
                                 : "Already Registered?"}
                         </span>
                         <span
                             onClick={toggleSignIn}
                             className="cursor-pointer select-none hover:underline">
-                            {isLoginForm ? "Sign up now" : "Sign In"}
+                            {isLoginForm
+                                ? lang[langKey].signupText
+                                : lang[langKey].loginText}
                         </span>
                     </div>
                 </form>

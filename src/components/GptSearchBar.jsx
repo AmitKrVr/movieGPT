@@ -1,7 +1,10 @@
+import { useSelector } from "react-redux";
 import useGptSearchMovies from "../hooks/useGptSearchMovies";
+import { lang } from "../utils/languageConstant";
 
 const GptSearchBar = () => {
     const { searchText, handleSearch } = useGptSearchMovies();
+    const langKey = useSelector((store) => store.config?.lang);
 
     return (
         <div className="flex justify-center h-72 md:h-80 items-center">
@@ -12,12 +15,12 @@ const GptSearchBar = () => {
                     ref={searchText}
                     className="px-3 py-2 col-span-9 rounded-md text-black"
                     type="text"
-                    placeholder="What would you like to watch today"
+                    placeholder={lang[langKey].gptSearchPlaceholder}
                 />
                 <button
                     onClick={handleSearch}
                     className="py-2 col-span-3 rounded-md bg-[#e50914] hover:bg-opacity-90">
-                    Search
+                    {lang[langKey].search}
                 </button>
             </form>
         </div>
