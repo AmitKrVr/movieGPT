@@ -18,13 +18,13 @@ const Login = () => {
 
     return (
         <div
-            className="absolute top-0 left-0 h-[38rem] w-full grid place-items-center"
+            className="absolute top-0 left-0 h-screen sm:h-[38rem] w-full grid place-items-center"
             style={{ backgroundImage: `url(${BG_URL})` }}>
-            <div className="md:w-1/3 flex justify-center bg-black md:bg-opacity-90 py-8 rounded-md mt-[4.3rem]">
+            <div className="w-full sm:w-2/3 md:w-1/3 flex justify-center bg-black md:bg-opacity-90 py-8 rounded-md mt-[18%] sm:mt-[4.3rem]">
                 <form
                     onSubmit={(e) => e.preventDefault()}
                     action=""
-                    className="flex flex-col w-11/12 md:w-3/4 gap-4 text-white">
+                    className="flex flex-col w-11/12 lg:w-3/4 gap-4 text-white">
                     <h1 className="font-bold text-2xl md:text-3xl tracking-wider mb-2 md:mb-3">
                         {isLoginForm
                             ? lang[langKey].loginText

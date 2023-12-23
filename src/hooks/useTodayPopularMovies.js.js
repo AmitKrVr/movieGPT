@@ -1,13 +1,20 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS } from "../utils/constant";
 import { addTodayPoularMovies } from "../utils/movieSlice";
 import { useEffect } from "react";
 
 const useTodayPoularMovies = () => {
     const dispatch = useDispatch();
+    const todayPopularMovies = useSelector(
+        (store) => store.movies.todayPopularMovies
+    );
 
     const todayPopular = async () => {
         try {
+            if (todayPopularMovies && todayPopularMovies.length > 0) {
+                return;
+            }
+
             const data = await fetch(
                 "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
                 API_OPTIONS

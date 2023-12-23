@@ -35,7 +35,7 @@ const useHeaderLogic = () => {
     };
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 const { uid, email, displayName, photoURL } = user;
                 dispatch(
@@ -48,12 +48,12 @@ const useHeaderLogic = () => {
                 );
                 navigate("/browse");
             } else {
-                // User is signed out
-                dispatch(removeUser());
                 navigate("/");
+                dispatch(removeUser());
             }
         });
-    }, []);
+        return () => unsubscribe();
+    }, [dispatch, navigate]);
 
     return {
         user,

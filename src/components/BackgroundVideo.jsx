@@ -11,7 +11,7 @@ const BackgroundVideo = ({ movieId }) => {
     const trailerIdKey = trailerId[0];
 
     return (
-        <div className="w-full aspect-video ">
+        <div className="w-full aspect-video pt-10 sm:pt-0">
             {trailerId && (
                 <iframe
                     className="w-full aspect-video"

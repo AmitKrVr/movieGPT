@@ -25,33 +25,44 @@ const Header = ({ handleLoginForm }) => {
     };
 
     return (
-        <div className="absolute z-10 w-full h-24 flex justify-center bg-gradient-to-b from-[#000000c6]">
-            <div className="w-11/12 md:w-10/12 flex items-center justify-between ">
+        <div className="absolute z-10 w-full h-12 sm:h-16 md:h-20 flex justify-center bg-black sm:bg-transparent bg-gradient-to-b from-black">
+            <div className="w-11/12  flex items-center justify-between ">
                 <div>
-                    <h1 className="text-4xl font-extrabold select-none text-[#e50914]">
-                        MovieGPT
-                    </h1>
+                    {user ? (
+                        <Link to="/browse">
+                            <h1 className="text-xl sm:text-3xl md:text-4xl font-extrabold select-none text-[#e50914]">
+                                MovieGPT
+                            </h1>
+                        </Link>
+                    ) : (
+                        <Link to="/">
+                            <h1 className="text-xl sm:text-3xl md:text-4xl font-extrabold select-none text-[#e50914]">
+                                MovieGPT
+                            </h1>
+                        </Link>
+                    )}
                 </div>
                 <div>
                     {user ? (
                         <div className="flex justify-center items-center space-x-2">
                             <div>
-                                <button
-                                    onClick={handleGptSearchPage}
-                                    className="px-1.5 md:px-3 py-1.5 md:py-1.5 rounded-md text-sm md:text-base text-white opacity-90 bg-[#e50914] hover:bg-opacity-90">
-                                    {showGptPage ? "Home page" : "GPT Search"}
-                                </button>
+                                <Link to="search">
+                                    <button className="px-1.5 md:px-3 py-1 sm:py-1.5 md:py-1.5 rounded-md text-xs sm:text-sm md:text-base text-white opacity-90 bg-[#e50914] hover:bg-opacity-90">
+                                        GPT Search
+                                    </button>
+                                </Link>
                             </div>
                             <div
                                 onMouseEnter={handleMouseEnter}
                                 onMouseLeave={handleMouseLeave}
-                                className="flex px-2 py-4 space-x-2 ">
+                                className="flex px-2 py-4 sm:space-x-2 ">
                                 <img
                                     src={PROFILE_LOGO}
                                     alt=""
-                                    className="rounded-md"
+                                    className="hidden sm:block rounded-md h-7 sm:h-auto"
                                 />
-                                <i className="fa-solid fa-sort-down text-white text-xl "></i>
+                                <i className="fa-solid fa-bars sm:hidden text-white"></i>
+                                <i className="fa-solid fa-sort-down text-white hidden sm:block text-xl "></i>
                             </div>
                         </div>
                     ) : (
@@ -82,7 +93,7 @@ const Header = ({ handleLoginForm }) => {
                 <div
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
-                    className="absolute  w-44 md:w-52 right-6 md:right-16 top-16 md:top-[4.5rem]  md:font-semibold text-[0.8rem] bg-[black] border border-[#333] text-white">
+                    className="absolute w-44 md:w-52 right-6 md:right-16 top-10 sm:top-16 md:top-[4.3rem]  md:font-semibold text-[0.8rem] bg-[black] border border-[#333] text-white">
                     <div className="grid pl-4 md:pl-6 py-4 md:py-6 space-y-2">
                         <div className="cursor-pointer hover:underline">
                             {user?.displayName}

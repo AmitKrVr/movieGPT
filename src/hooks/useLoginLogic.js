@@ -51,14 +51,13 @@ const useLoginLogic = () => {
                     });
                 })
                 .then(() => {
-                    const { uid, email, password, displayName, photoURL } =
+                    const { uid, email, displayName, photoURL } =
                         auth.currentUser;
 
                     dispatch(
                         addUser({
                             uid: uid,
                             email: email,
-                            password: password,
                             displayName: displayName,
                             photoURL: photoURL,
                         })

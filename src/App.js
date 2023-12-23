@@ -5,6 +5,8 @@ import Header from "./components/Header";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Browse from "./components/Browse";
+import MovieDetails from "./components/movieDetails/MovieDetails";
+import GptSearchPage from "./components/GptSearchPage";
 
 const App = () => {
     const AppLayout = () => {
@@ -34,6 +36,14 @@ const App = () => {
                 {
                     path: "/browse",
                     element: <Browse />,
+                },
+                {
+                    path: "browse/:movieId",
+                    element: <MovieDetails />,
+                },
+                {
+                    path: "/search",
+                    element: <GptSearchPage />,
                 },
             ],
         },
