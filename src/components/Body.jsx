@@ -7,10 +7,10 @@ const Body = () => {
     const langKey = useSelector((store) => store.config?.lang);
     return (
         <div
-            className="absolute top-0 left-0 h-[38rem] w-full grid place-items-center"
+            className="h-[25rem] top-0 left-0 md:h-[38rem] w-full grid place-items-center"
             style={{ backgroundImage: `url(${BG_URL})` }}>
-            <div className="w-3/4 md:w-1/2 h-1/2 text-center ">
-                <p className="font-extrabold text-white text-4xl mb-5">
+            <div className="w-10/12 sm:w-3/4 md:w-1/2 h-1/4 md:h-1/2 text-center ">
+                <p className="font-extrabold text-white text-2  xl md:text-4xl mb-5">
                     {lang[langKey].bodyText}
                 </p>
 

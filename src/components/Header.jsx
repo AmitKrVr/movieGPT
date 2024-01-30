@@ -8,10 +8,8 @@ import { SUPPORTED_LANG, lang } from "../utils/languageConstant";
 const Header = ({ handleLoginForm }) => {
     const {
         user,
-        showGptPage,
         isHovered,
         handleSingout,
-        handleGptSearchPage,
         handleMouseEnter,
         handleMouseLeave,
     } = useHeaderLogic();

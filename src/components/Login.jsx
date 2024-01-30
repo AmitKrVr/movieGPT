@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import useLoginLogic from "../hooks/useLoginLogic";
 import { BG_URL } from "../utils/constant";
 import { lang } from "../utils/languageConstant";
+import useLoginLogic from "../hooks/useLoginLogic";
 
 const Login = () => {
     const {
@@ -12,9 +12,9 @@ const Login = () => {
         errorMessage,
         toggleSignIn,
         handleValidation,
+        langKey,
+        loading,
     } = useLoginLogic();
-
-    const langKey = useSelector((store) => store.config?.lang);
 
     return (
         <div
@@ -25,11 +25,26 @@ const Login = () => {
                     onSubmit={(e) => e.preventDefault()}
                     action=""
                     className="flex flex-col w-11/12 lg:w-3/4 gap-4 text-white">
-                    <h1 className="font-bold text-2xl md:text-3xl tracking-wider mb-2 md:mb-3">
+                    <h1 className="font-bold text-2xl md:text-3xl tracking-wider">
                         {isLoginForm
                             ? lang[langKey].loginText
                             : lang[langKey].signupText}
                     </h1>
+
+                    <div className="mb-5 ">
+                        <span className="text-[#b3b3b3] mr-2 text-sm">
+                            {isLoginForm
+                                ? "Don't have an account?"
+                                : "Already Registered?"}
+                        </span>
+                        <span
+                            onClick={toggleSignIn}
+                            className="cursor-pointer text-white/90 select-none hover:underline">
+                            {isLoginForm
+                                ? lang[langKey].signupText
+                                : lang[langKey].loginText}
+                        </span>
+                    </div>
 
                     {!isLoginForm && (
                         <input
@@ -63,10 +78,10 @@ const Login = () => {
 
                     <button
                         onClick={handleValidation}
-                        className="bg-[#e50914] font-semibold mt-2 md:mt-4 px-4 py-2.5 md:py-3 w-full rounded-sm md:rounded-md">
-                        {!isLoginForm
-                            ? lang[langKey].signupText
-                            : lang[langKey].loginText}
+                        className={`bg-[#e50914] font-semibold mt-2 md:mt-4 px-4 py-2.5 md:py-3 w-full rounded-sm md:rounded-md ${
+                            loading ? "opacity-70 cursor-not-allowed" : ""
+                        }`}>
+                        {loading ? "Submitting..." : "Submit"}
                     </button>
 
                     <div className="flex justify-between text-sm text-[#b3b3b3]">
@@ -76,21 +91,6 @@ const Login = () => {
                         </span>
                         <span className="hover:underline">
                             {lang[langKey].needHelp}
-                        </span>
-                    </div>
-
-                    <div className="mt-4 md:mt-7 ">
-                        <span className="text-[#b3b3b3] mr-2">
-                            {isLoginForm
-                                ? "New to MovieGPT?"
-                                : "Already Registered?"}
-                        </span>
-                        <span
-                            onClick={toggleSignIn}
-                            className="cursor-pointer select-none hover:underline">
-                            {isLoginForm
-                                ? lang[langKey].signupText
-                                : lang[langKey].loginText}
                         </span>
                     </div>
                 </form>

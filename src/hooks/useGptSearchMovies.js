@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { API_OPTIONS, TMDB_MOVIE_SEARCH_API } from "../utils/constant";
 import openai from "../utils/openai";
@@ -7,12 +7,13 @@ import { addGptMovieResults } from "../utils/gptSlice";
 const useGptSearchMovies = () => {
     const dispatch = useDispatch();
     const searchText = useRef(null);
+    const [loading, setLoading] = useState(false);
 
     const tmdbSearch = async (movie) => {
         const data = await fetch(
             TMDB_MOVIE_SEARCH_API +
                 movie +
-                "&include_adult=true&language=en-US&page=1",
+                "&include_adult=false&language=en-US&page=1",
             API_OPTIONS
         );
 
@@ -22,6 +23,8 @@ const useGptSearchMovies = () => {
     };
 
     const handleSearch = async () => {
+        setLoading(true);
+
         const getQuery =
             "Act as a Movie Recommendation System and suggest some movies for the query : " +
             searchText.current.value +
@@ -45,9 +48,11 @@ const useGptSearchMovies = () => {
                 movieResults: tmdbResults,
             })
         );
+
+        setLoading(false);
     };
 
-    return { searchText, handleSearch };
+    return { searchText, handleSearch, loading };
 };
 
 export default useGptSearchMovies;

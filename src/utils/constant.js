@@ -18,3 +18,6 @@ export const API_OPTIONS = {
         Authorization: tmdbAPI,
     },
 };
+
+// personAPI = "https://api.themoviedb.org/3/person/117642?language=en-US"
+//https://developer.themoviedb.org/reference/person-details

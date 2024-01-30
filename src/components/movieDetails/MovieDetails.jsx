@@ -1,9 +1,10 @@
-import "../NowPlayingVideoCard.css";
 import Credits from "./Credits";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useMovieDetails from "../../hooks/useMovieDetails";
 import useTrailerVideo from "../../hooks/useTrailerVideo";
+import { Link } from "react-router-dom";
+import Media from "./Media";
 
 const MovieDetails = () => {
     const { movieId } = useParams();
@@ -35,6 +36,9 @@ const MovieDetails = () => {
     } = movieInfo;
 
     const genresData = genres ? genres.map((genre) => genre.name) : [];
+
+    const hours = Math.floor(runtime / 60);
+    const minutes = runtime % 60;
 
     return (
         <div className="">
@@ -69,10 +73,12 @@ const MovieDetails = () => {
                                     {original_title}
                                 </p>
                                 <div className="flex space-x-2">
-                                    <button className="flex items-center px-2.5 md:px-5 py-1 md:py-1.5 text-base md:text-lg md:font-medium rounded-md bg-white bg-opacity-90 hover:opacity-85 text-black">
-                                        <i className="fa-solid fa-play mr-0.5 hidden md:block"></i>
-                                        Play
-                                    </button>
+                                    <Link to={"/browse/" + id}>
+                                        <button className="flex items-center px-2.5 md:px-5 py-1 md:py-1.5 text-base md:text-lg md:font-medium rounded-md bg-white bg-opacity-90 hover:opacity-85 text-black">
+                                            <i className="fa-solid fa-play mr-0.5 hidden md:block"></i>
+                                            Play
+                                        </button>
+                                    </Link>
                                     <button className="flex items-center px-2 md:px-3 py-1 md:py-1.5 text-base md:text-lg md:font-medium rounded-md bg-white bg-opacity-90 hover:opacity-85 text-black">
                                         <i className="fa-solid fa-circle-plus hidden sm:block"></i>
                                     </button>
@@ -98,7 +104,7 @@ const MovieDetails = () => {
                                         </div>
                                         <div>
                                             {genresData.join(", ")}
-                                            &nbsp; 2h 4m
+                                            &nbsp; {hours}h {minutes}m
                                         </div>
                                     </div>
                                 </div>
@@ -150,7 +156,7 @@ const MovieDetails = () => {
                                             Budget
                                         </p>
                                         <p className="text-sm opacity-80">
-                                            ${budget}
+                                            ${budget}.00
                                         </p>
                                     </div>
                                     <div className="">
@@ -163,7 +169,14 @@ const MovieDetails = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex ">
+                            <div className="pt-6 overflow-hidden max-w-full">
+                                <Media id={id} />
+                            </div>
+
+                            <div className="flex flex-col pb-10 pt-10 ">
+                                <div className="text-2xl font-semibold mb-4 tracking-wider">
+                                    Credits
+                                </div>
                                 <Credits id={id} />
                             </div>
                         </div>

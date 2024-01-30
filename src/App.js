@@ -7,6 +7,7 @@ import appStore from "./utils/appStore";
 import Browse from "./components/Browse";
 import MovieDetails from "./components/movieDetails/MovieDetails";
 import GptSearchPage from "./components/GptSearchPage";
+import Footer from "./components/Footer";
 
 const App = () => {
     const AppLayout = () => {
@@ -15,6 +16,7 @@ const App = () => {
                 <Provider store={appStore}>
                     <Header />
                     <Outlet />
+                    <Footer />
                 </Provider>
             </>
         );
@@ -44,6 +46,10 @@ const App = () => {
                 {
                     path: "/search",
                     element: <GptSearchPage />,
+                },
+                {
+                    path: "*",
+                    element: <Body />,
                 },
             ],
         },

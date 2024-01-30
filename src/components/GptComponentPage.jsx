@@ -7,14 +7,16 @@ const GptComponentPage = () => {
     if (!movieNames) return null;
 
     return (
-        <div className="bg-black py-6">
-            {movieNames.map((movieName, index) => (
-                <NowPlayingMovieList
-                    key={index}
-                    title={movieName}
-                    movies={movieResults[index]}
-                />
-            ))}
+        <div className="flex flex-col items-center bg-black">
+            <div className="bg-black py-6 w-11/12">
+                {movieNames.map((movieName, index) => (
+                    <NowPlayingMovieList
+                        key={index}
+                        title={movieName}
+                        movies={movieResults[index]}
+                    />
+                ))}
+            </div>
         </div>
     );
 };
