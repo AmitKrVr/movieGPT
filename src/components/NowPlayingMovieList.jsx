@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import NowPlayingVideoCard from "./NowPlayingVideoCard";
 import { useRef } from "react";
+import SimmerUI from "./SimmerUI";
 
 const NowPlayingMovieList = ({ title, movies }) => {
     const elementRef = useRef();
@@ -30,14 +31,17 @@ const NowPlayingMovieList = ({ title, movies }) => {
                 />
 
                 <div className="flex w-full space-x-2.5 md:space-x-4">
-                    {Array.isArray(movies) &&
-                        movies.map((movie) => (
-                            <NowPlayingVideoCard
-                                key={movie.id}
-                                movieId={movie.id}
-                                posterPath={movie.poster_path}
-                            />
-                        ))}
+                    {Array.isArray(movies)
+                        ? movies.map((movie) => (
+                              <NowPlayingVideoCard
+                                  key={movie.id}
+                                  movieId={movie.id}
+                                  posterPath={movie.poster_path}
+                              />
+                          ))
+                        : Array.from({ length: 10 }).map((_, index) => (
+                              <SimmerUI key={index} />
+                          ))}
                 </div>
             </div>
         </div>

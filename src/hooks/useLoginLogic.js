@@ -5,9 +5,12 @@ import { auth } from "../utils/firebase";
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    signInWithPopup,
+    signInWithRedirect,
     updateProfile,
 } from "firebase/auth";
 import { addUser } from "../utils/userSlice";
+import { provider } from "../utils/firebase";
 
 const useLoginLogic = () => {
     const dispatch = useDispatch();
@@ -27,7 +30,6 @@ const useLoginLogic = () => {
 
     const handleValidation = async () => {
         setErrorMessage(null);
-        setLoading(true);
 
         try {
             const message = fullName.current
@@ -97,7 +99,19 @@ const useLoginLogic = () => {
             const errorMessage = error.message;
             setErrorMessage(errorCode);
         }
+
+        setLoading(true);
     };
+
+    const handleGoogleLogin = async () => {
+        try {
+            const userCredentials = await signInWithPopup(auth, provider);
+            // await signInWithRedirect(auth, provider);
+        } catch (error) {
+            console.log("Error: ", error);
+        }
+    };
+
     return {
         fullName,
         email,
@@ -108,6 +122,7 @@ const useLoginLogic = () => {
         handleValidation,
         langKey,
         loading,
+        handleGoogleLogin,
     };
 };
 export default useLoginLogic;

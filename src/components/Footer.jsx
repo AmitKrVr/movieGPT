@@ -7,7 +7,7 @@ export default function Footer() {
 
     return (
         <footer className="w-full py-5 bg-black">
-            <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2 lg:px-0">
+            {/* <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2 lg:px-0">
                 <div className="inline-flex items-center">
                     {user ? (
                         <Link to="/browse">
@@ -37,7 +37,7 @@ export default function Footer() {
                         </Link>
                     </div>
                 )}
-            </div>
+            </div> */}
             <div className="border-b border-white/50 my-8 " />
             <div className="mx-auto flex max-w-6xl flex-col items-start space-x-8 md:flex-row">
                 <div className="w-full flex flex-col gap-y-8 md:gap-y-12 px-4 md:w-1/2 lg:px-0">

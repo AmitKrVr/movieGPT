@@ -67,7 +67,7 @@ const MovieDetails = () => {
                             />
                         )}
 
-                        <div className="hidden sm:block w-full absolute -bottom-0 bg-gradient-to-t h-2/3 from-black">
+                        {/* <div className="hidden sm:block w-full absolute -bottom-0 bg-gradient-to-t h-2/3 from-black">
                             <div className="absolute bottom-12 md:bottom-44 left-7 w-1/2 md:w-1/3 space-y-3">
                                 <p className="text-lg md:text-2xl font-semibold text-white ">
                                     {original_title}
@@ -84,7 +84,7 @@ const MovieDetails = () => {
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="w-full text-white bg-black space-y-4 pt-5">
                         <div className=" w-11/12 sm:w-3/4 mx-auto">

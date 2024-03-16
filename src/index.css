@@ -5,3 +5,37 @@
 * {
     font-family: "Poppins", sans-serif;
 }
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.shimmer {
+    /* background: linear-gradient(to right, #2b2b2b 8%, #292929 18%, #232323 33%); */
+    background: linear-gradient(to right, #2b2b2b 8%, #202020 18%, #232323 33%);
+    background-size: 1000px 100%;
+    animation: shimmer 2.2s linear infinite forwards;
+}
+
+.shimmer-thumbnail {
+    min-width: 180px;
+    width: 100%;
+    height: 218px;
+    margin-bottom: 20px;
+    display: inline-block;
+    border-radius: 10px;
+}
+.shimmer-thumbnail-main {
+    min-width: 180px;
+    width: 100%;
+    height: 450px;
+}
+
+.m-0 {
+    margin: 0 !important;
+}

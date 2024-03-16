@@ -1,7 +1,8 @@
-import { useSelector } from "react-redux";
 import { BG_URL } from "../utils/constant";
 import { lang } from "../utils/languageConstant";
 import useLoginLogic from "../hooks/useLoginLogic";
+import { validateData } from "../utils/validate";
+import { Link } from "react-router-dom";
 
 const Login = () => {
     const {
@@ -14,13 +15,14 @@ const Login = () => {
         handleValidation,
         langKey,
         loading,
+        handleGoogleLogin,
     } = useLoginLogic();
 
     return (
         <div
             className="absolute top-0 left-0 h-screen sm:h-[38rem] w-full grid place-items-center"
             style={{ backgroundImage: `url(${BG_URL})` }}>
-            <div className="w-full sm:w-2/3 md:w-1/3 flex justify-center bg-black md:bg-opacity-90 py-8 rounded-md mt-[18%] sm:mt-[4.3rem]">
+            <div className="w-full sm:w-2/3 md:w-1/3 flex flex-col items-center bg-black md:bg-opacity-90 py-8 rounded-md mt-[18%] sm:mt-[4.3rem]">
                 <form
                     onSubmit={(e) => e.preventDefault()}
                     action=""
@@ -89,11 +91,22 @@ const Login = () => {
                             <input type="checkbox" defaultChecked />
                             <label> {lang[langKey].rememberMe} </label>
                         </span>
-                        <span className="hover:underline">
-                            {lang[langKey].needHelp}
-                        </span>
+                        <Link to="/password-recovery">
+                            <span className="hover:underline cursor-pointer">
+                                {isLoginForm
+                                    ? "Forgot Password"
+                                    : lang[langKey].needHelp}
+                            </span>
+                        </Link>
                     </div>
                 </form>
+                <div className="mt-5">
+                    <button
+                        onClick={handleGoogleLogin}
+                        className="px-5 py-2 rounded-xl border-gray-800 bg-white/80">
+                        Signin With Google
+                    </button>
+                </div>
             </div>
         </div>
     );

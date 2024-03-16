@@ -8,6 +8,9 @@ import Browse from "./components/Browse";
 import MovieDetails from "./components/movieDetails/MovieDetails";
 import GptSearchPage from "./components/GptSearchPage";
 import Footer from "./components/Footer";
+import Loder from "./components/Loder";
+import { Login2 } from "./components/Login2";
+import ForgotPassword from "./components/ForgotPassword";
 
 const App = () => {
     const AppLayout = () => {
@@ -46,6 +49,10 @@ const App = () => {
                 {
                     path: "/search",
                     element: <GptSearchPage />,
+                },
+                {
+                    path: "/password-recovery",
+                    element: <ForgotPassword />,
                 },
                 {
                     path: "*",

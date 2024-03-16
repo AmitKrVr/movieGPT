@@ -6,6 +6,8 @@ import useTopRatedMovies from "../hooks/useTopRatedMovies";
 import useUpcomingMovies from "../hooks/useUpcomingMovies";
 import useThisWeekMovies from "../hooks/useThisWeekMovies";
 import useTodayPoularMovies from "../hooks/useTodayPopularMovies.js";
+import { useSelector } from "react-redux";
+import SimmerMain from "./SimmerMain.jsx";
 
 const Browse = () => {
     useNowPlayingMovies();
@@ -15,10 +17,12 @@ const Browse = () => {
     useThisWeekMovies();
     useTodayPoularMovies();
 
+    const movies = useSelector((state) => state.movies?.nowPlayingMovies);
+
     return (
         <div>
             <div className="">
-                <MainContainer />
+                {movies[1] ? <MainContainer /> : <SimmerMain />}
             </div>
             <div className="">
                 <SecondaryContainer />
